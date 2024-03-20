@@ -1,0 +1,169 @@
+
+#!/usr/bin/env /usr/bin/python3
+
+import os
+
+# Función para listar directorios
+def listar_directorios():
+    print("Lista de directorios:")
+    # Recorre todos los directorios y subdirectorios del directorio actual
+    for dirpath, dirnames, filenames in os.walk('.'):
+        for dirname in dirnames:
+            # Imprime el nombre completo de cada directorio encontrado
+            print(os.path.join(dirpath, dirname))
+
+def mostrar_directorio_actual():
+    try:
+        directorio_actual = os.getcwd()
+        print(f"Directorio actual: {directorio_actual}")
+    except Exception as e:
+        print("Error al mostrar el directorio actual:", e)
+
+# Función para mostrar el menú de opciones
+def mostrar_menu():
+    print("""
+✿´¯¥¯`✿¯¥¯`✿(-MINI GESTOR")✿´¯¥¯`✿¯¥¯`✿
+""")
+    print("1. Listar directorios")
+    print("2. Cambiar permisos de un archivo/directorio")
+    print("3. Cambiar nombre de un archivo/directorio")
+    print("4. Crear archivo")
+    print("5. Crear un nuevo directorio")
+    print("6. Eliminar un archivo/directorio")
+    print("7. Listar archivos")
+    print("8. Escribir en un archivo")
+    print("9. mostrar el contenido de un archivo")
+    print("10. Mostrar Directorio Actual ")
+    print("11. Salir")
+    print("""
+✿´¯¥¯`✿´¯¥¯`✿¯¥¯`✿¯¥¯`✿¯¥¯`✿¯¥¯`✿
+""")
+
+import os
+
+# Función para cambiar permisos de un archivo o directorio
+def cambiar_permisos():
+    nombre = input("Ingrese el nombre del archivo/directorio para cambiar permisos: ")
+    permisos = input("Ingrese los nuevos permisos (en formato octal, por ejemplo 755): ")
+    try:
+        os.chmod(nombre, int(permisos, 8))
+        print(f"Permisos cambiados con éxito para '{nombre}'.")
+    except FileNotFoundError:
+        print("El archivo/directorio no existe.")
+    except ValueError:
+        print("Los permisos deben ser un número octal válido.")
+
+# Función para cambiar el nombre de un archivo o directorio
+def cambiar_nombre():
+    nombre_actual = input("Ingrese el nombre actual del archivo/directorio: ")
+    nuevo_nombre = input("Ingrese el nuevo nombre: ")
+    try:
+        os.rename(nombre_actual, nuevo_nombre)
+        print(f"El archivo/directorio '{nombre_actual}' ha sido renombrado como '{nuevo_nombre}'.")
+    except FileNotFoundError:
+        print("El archivo/directorio no existe.")
+
+import os
+
+# Función para crear un nuevo archivo
+def crear_archivo():
+    nombre_archivo = input("Ingrese el nombre del nuevo archivo: ")
+    try:
+        with open(nombre_archivo, 'w'):
+            pass  # Solo se crea el archivo vacío
+        print(f"Archivo '{nombre_archivo}' creado con éxito.")
+    except FileExistsError:
+        print(f"El archivo '{nombre_archivo}' ya existe.")
+    except PermissionError:
+        print("No tiene permiso para crear este archivo.")
+
+
+
+# Función para crear un nuevo directorio
+def crear_directorio():
+    nombre_directorio = input("Ingrese el nombre del nuevo directorio: ")
+    try:
+        os.mkdir(nombre_directorio)
+        print(f"Directorio '{nombre_directorio}' creado con éxito.")
+    except FileExistsError:
+        print(f"El directorio '{nombre_directorio}' ya existe.")
+
+def eliminar_archivo_directorio():
+    nombre = input("Ingrese el nombre del archivo/directorio a eliminar: ")
+    try:
+        if os.path.isfile(nombre):
+            os.remove(nombre)
+            print(f"Archivo '{nombre}' eliminado con éxito.")
+        elif os.path.isdir(nombre):
+            os.rmdir(nombre)
+            print(f"Directorio '{nombre}' eliminado con éxito.")
+    except FileNotFoundError:
+        print("El archivo/directorio no existe.")
+
+
+def listar_archivos():
+    print("Lista de archivos en el directorio actual:")
+    for item in os.listdir('.'):
+        if os.path.isfile(item):  # Verifica si es un archivo
+            print(item)
+
+
+# Función para escribir en un archivo
+def escribir_en_archivo():
+    nombre_archivo = input("Ingrese el nombre del archivo: ")
+    contenido = input("Ingrese el contenido a escribir: ")
+    ruta = os.path.join(os.getcwd(), nombre_archivo)  # Obtiene la ruta completa del archivo
+    try:
+        with open(ruta, 'w') as archivo:
+            archivo.write(contenido)
+            print("Contenido escrito con éxito.")
+    except PermissionError:
+        print("No tiene permiso para escribir en este archivo.")
+
+
+def mostrar_contenido_archivo():
+    nombre_archivo = input("Ingrese el nombre del archivo: ")
+    try:
+        with open(nombre_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            print(f"Contenido de '{nombre_archivo}':\n{contenido}")
+    except FileNotFoundError:
+        print("El archivo no existe.")
+    except IsADirectoryError:
+        print("El nombre especificado corresponde a un directorio.")
+
+
+# Función principal que ejecuta el menú y las operaciones correspondientes
+def main():
+    while True:
+        mostrar_menu()
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            listar_directorios()
+        elif opcion == "2":
+            cambiar_permisos()
+        elif opcion == "3":
+            cambiar_nombre()
+        elif opcion == "4":
+            crear_archivo()
+        elif opcion == "5":
+            crear_directorio()
+        elif opcion == "6":
+            eliminar_archivo_directorio()
+        elif opcion == "7":
+            listar_archivos()
+        elif opcion == "8":
+            escribir_en_archivo()
+        elif opcion == "9":
+             mostrar_contenido_archivo()
+        elif opcion == "10":
+            mostrar_directorio_actual()
+        elif opcion == "11":
+            print("¡Hasta luego!")
+            break
+        else:
+            print("Opción inválida.")
+
+# Se asegura de que la función main() se ejecute solo si este archivo se ejecuta directamente
+if __name__ == "__main__":
+    main()
