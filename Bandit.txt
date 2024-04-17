@@ -1,0 +1,382 @@
+Level 0
+	Commands:
+		silramayo@kamadoSIL-ER43S19O MINGW64 /
+		$ ssh bandit0@bandit.labs.overthewire.org -p 2220
+Nivel 0-1
+	Descripción:
+		Lectura de un archivo de texto.
+	Comandos:
+		bandit0@bandit:~$ ls
+		bandit0@bandit:~$ cat readme
+		Contenido: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+Nivel 1-2
+	Descripción:
+		Lectura de un archivo con nombre inusual.
+	Comandos: 
+		bandit1@bandit:~$ pwd
+		bandit1@bandit:~$ cat /home/bandit1/-
+		Contenido: rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+Nivel 2-3
+	Descripción:
+		Lectura de un archivo con espacios en el nombre.
+	Comandos: 
+		bandit2@bandit:~$ ls
+		bandit2@bandit:~$ cat s*
+		Contenido: aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+Nivel 3-4
+	Descripción:
+		Búsqueda y lectura de un archivo oculto.
+	Comandos:
+		bandit3@bandit:~$ cd inhere
+		bandit3@bandit:~/inhere$ ls -al
+		bandit3@bandit:~/inhere$ cat .hidden
+		Contenido: 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+
+Nivel 4-5
+	Descripción:
+		Búsqueda y lectura de un archivo con un nombre que comienza con un guion.
+	Comandos:
+		bandit4@bandit:~/inhere$ cd
+		bandit4@bandit:~$ ls
+		bandit4@bandit:~$ cd inhere
+		...
+		(continuar con los comandos)
+
+Nivel 5-6
+	Descripción:
+		Utilización de la herramienta 'find' para localizar y leer un archivo de tamaño específico.
+	Comandos: 
+		bandit5@bandit:~/inhere$ find ./ -type f -size 1033c
+		bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+		Contenido: P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+
+Nivel 6-7
+	Descripción:
+		Utilización de 'find' para buscar archivos con ciertas propiedades y lectura del contenido.
+	Comandos: 
+		bandit6@bandit:~$ find / -size 33c -user bandit7 -group bandit6
+		bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+		Contenido: z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+Nivel 7-8
+	Descripción:
+		Búsqueda de una cadena específica en un archivo de texto.
+	Comandos:
+		bandit7@bandit:~$ ls
+		bandit7@bandit:~$ grep "millionth" data.txt
+		Contenido: millionth       TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+Nivel 8-9
+	Descripción:
+		Ordenación y búsqueda de una única línea no repetida en un archivo de texto.
+	Comandos:
+		bandit8@bandit:~$ ls
+		bandit8@bandit:~$ sort data.txt | uniq -u
+		Contenido: EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+Nivel 9-10
+	Descripción:
+		Extracción de cadenas específicas desde un archivo de texto utilizando 'strings' y 'grep'.
+	Comandos:
+		bandit9@bandit:~$ ls
+		bandit9@bandit:~$ strings data.txt | grep "=========="
+		Contenido: ========== theG)"
+		           ========== passwordk^
+		           ========== is
+		           ========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+
+	
+Nivel 10-11
+	Descripción:
+		Decodificación de texto codificado en base64.
+	Comandos:
+		bandit10@bandit:~$ ls
+		bandit10@bandit:~$ base64 -d data.txt
+		Contenido: The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+
+Nivel 11-12
+	Descripción:
+		Decodificación de texto cifrado mediante el cifrado de César.
+	Comandos:
+		bandit11@bandit:~$ ls
+		bandit11@bandit:~$ cat data.txt
+		Contenido: Gur cnffjbeq vf WIAOOSFzMjXXBC0KoSKBbJ8puQm5lIEi
+		bandit11@bandit:~$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+		Contenido: The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+
+
+Nivel 12-13
+	Commands:
+		1  ls
+    		2  cat data.txt
+   		3  mkdir /tmp/sil
+  		4  cd /tmp/sil
+    		5  ls
+    		6  file data.txt
+    		7  clear
+    		8  cat data.txt | xxd -r > data
+    		9  ls
+   		10  file data
+   		11  mv data data.gz
+   		12  ls
+   		13  gzip -d data.gz
+   		14  ls
+   		15  file data
+   		16  mv data data1.bz
+   		17  ls
+   		18  bzip2 -d data1.bz
+   		19  ls
+   		20  file data1
+   		21  mv data1 data3.gz
+   		22  ls
+   		23  clear
+   		24  gzip -d data3.gz
+   		25  ls
+   		26  file data3
+   		27  mv data3 data4.tar
+   		28  ls
+   		29  tar -xvf data4.tar
+   		30  ls
+   		31  file data5.bin
+   		32  mv data5.bin data6.tar
+   		33  ls
+   		34  tar -xvf data6.tar
+   		35  file data6.bin
+   		36  mv data6.bin data6.bz
+   		37  ls
+   		38  file data6.bz
+   		39  bzip2 data6.bz
+   		40  bzip2 -d data6.bz
+   		41  ls
+   		42  file data6
+   		43  mv data6 data7.tar
+   		44  ls
+   		45  tar -xvf data7.tar
+   		46  clear
+  		47  file data8.bin
+   		48  mv data8.bin data9.gz
+   		49  ls
+   		50  gzip -d data9.gz
+  		51  ls
+   		52  file data9
+   		53  cat data9
+
+		The password is wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+
+Nivel 13-14
+	Descripción:
+		Localización y lectura de una clave SSH privada.
+	Comandos:
+		bandit13@bandit:~$ ls
+		bandit13@bandit:~$ cat sshkey.private
+		Contenido: (contenido de la clave SSH privada)
+
+Nivel 14-15
+	Descripción:
+		Utilización de Netcat para enviar una contraseña a un servicio en el puerto 30000.
+	Comandos:
+		bandit14@bandit:~$ echo "fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq" | nc localhost 30000
+		Respuesta: Correct!
+		Contraseña: jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+
+Nivel 15-16
+	Descripción:
+		Utilización de OpenSSL para conectarse a un servicio en el puerto 30001.
+	Comandos:
+		bandit15@bandit:~$ openssl s_client -connect localhost:30001
+		Respuesta: Correct!
+		Contraseña: JQttfApK4SeyHwDlI9SXGR50qclOAil1
+
+Nivel 16-17
+	Descripción:
+		Escaneo de puertos con nmap y conexión con OpenSSL para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit16@bandit:~$ nmap localhost -p 31000-32000
+		bandit16@bandit:~$ cat /etc/bandit_pass/bandit16 | openssl s_client -connect localhost:31790 -ign_eof
+		Contraseña: cluFn7wTiGryunymYOu4RcffSxQluehd
+
+Nivel 17-18
+	Descripción:
+		Comparación de dos archivos para encontrar la nueva contraseña.
+	Comandos:
+		bandit17@bandit:~$ diff passwords.old passwords.new
+		Respuesta: 42c42
+			  < p6ggwdNHncnmCNxuAt0KtKVq185ZU7AW
+			  ---
+			  > hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+		Contraseña: hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+
+Nivel 18-19
+	Descripción:
+		Conexión SSH y lectura de la contraseña del siguiente nivel.
+	Comandos:
+		ssh bandit18@bandit.labs.overthewire.org -p 2220
+		Contraseña: awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+
+Nivel 19-20
+	Descripción:
+		Ejecución de un binario especial para leer la contraseña del siguiente nivel.
+	Comandos:
+		bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
+		Contraseña: VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+		
+		
+Nivel 20-21
+	Descripción:
+		Utilización de un servicio personalizado para obtener la contraseña del siguiente nivel.
+	Comandos:
+		bandit20@bandit:~$ ./suconnect 9999
+		bandit20@bandit:~$  echo -n 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT' | nc -l -p 1234
+		Contraseña: NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+
+Nivel 21-22
+	Descripción:
+		Examinar archivos relacionados con cronjobs para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit21@bandit:/etc/cron.d$ ls
+		bandit21@bandit:/etc/cron.d$ cat cronjob_bandit22
+		bandit21@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit22.sh
+		bandit21@bandit:/etc/cron.d$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+		Contraseña: WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+
+Nivel 22-23
+	Descripción:
+		Examinar archivos relacionados con cronjobs para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit22@bandit:/etc/cron.d$ ls
+		bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23
+		bandit22@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit23.sh
+		bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+		Contraseña: QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+
+Nivel 23-24
+	Descripción:
+		Examinar archivos relacionados con cronjobs para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		cd /etc/cron.d
+		ls -al
+  		cat cronjob_bandit24
+   		cat /usr/bin/cronjob_bandit24.sh
+   		mktemp -d
+  		cd /tmp/tmp.kLGcEhyHgI
+   		vi password.sh
+   		touch password.sh
+		cat password.sh
+		Contraseña: VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+
+Nivel 24-25
+	Descripción:
+		Creación de un script para realizar un ataque de fuerza bruta y obtener la contraseña del siguiente nivel.
+	Comandos:
+		bandit24@bandit:/tmp/bauky$ vi brute.sh
+		#!/bin/bash
+
+		bandit24=VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+		for pin in {0000..9999};do
+  		      echo "$bandit24 $pin"
+		done | nc localhost 30002 > output.txt
+
+		bandit24@bandit:/tmp/bauky$ ./brute.sh
+		bandit24@bandit:/tmp/bauky$ touch output.txt
+		bandit24@bandit:/tmp/bauky$ cat output.txt | grep "The password"
+		Contraseña: The password of user bandit25 is p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d
+
+Nivel 25-26
+	Descripción:
+		Edición de un archivo de texto para ejecutar un comando en el editor de texto y obtener la contraseña del siguiente nivel.
+	Comandos:
+		: r /etc/bandit_pass/bandit26
+		c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1
+Nivel 27-28
+	Descripción:
+		Clonación de un repositorio Git para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit27@bandit:/tmp/out$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
+		Contraseña: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+
+Nivel 28-29
+	Descripción:
+		Clonación de un repositorio Git y revisión de los cambios para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit28@bandit:/tmp/out$ git clone ssh://bandit28-git@localhost:2220/home/bandit27-git/repo
+		Contraseña: xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS
+
+Nivel 29-30
+	Descripción:
+		Clonación de un repositorio Git y cambio de rama para encontrar la contraseña del siguiente nivel.
+	Comandos:
+		bandit29@bandit:/tmp/out$ git clone ssh://bandit29-git@localhost:2220/home/bandit27-git/repo
+		Contraseña: 82DKfV8pGQXvhXmEZX0Wzcvg3F0UYeQj	
+
+Nivel 30-31
+	Commands:
+		bandit30@bandit:~$ mkdir /tmp/clone1
+		bandit30@bandit:~$ cd /tmp/clone1
+		bandit30@bandit:/tmp/clone1$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+		bandit30@bandit:/tmp/clone1/repo$ cat README.md
+		just an epmty file... muahaha
+		bandit30@bandit:/tmp/clone1/repo$ git show secret
+OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt
+
+Nivel 31-32
+	Commands:
+		
+		bandit31@bandit:~$ git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+		bandit31@bandit:~$ls -al
+		bandit31@bandit:~$cd repo
+
+		bandit31@bandit:~$ls -al
+		bandit31@bandit:~$cat README.md
+		bandit31@bandit:~$vi key.txt
+		bandit31@bandit:~$git add -f
+		bandit31@bandit:~$git status
+		bandit31@bandit:~$git commit -m “key.txt”
+		bandit31@bandit:~$git push -u origin master
+		rmCBvG56y58BXzv98yZGdO7ATVL5dW8y
+		
+
+Nivel 32-33
+	Commands:
+		bandit32@bandit:~$0
+		bandit32@bandit:~$ls -al
+		bandit32@bandit:~$whoami
+		bandit32@bandit:~$cat /etc/bandit\_pass/bandit33
+		odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
+
+Nivel 33-34
+	Commands:
+		bandit33@bandit:~$ls -al
+		bandit33@bandit:~$cat README.txt
+		FIN
+	
+		
+
+
+
+
+
+		
+	
+		
+
+
+			
+
+		
+
+		
+
+
+
+		
+
+
+
+		
+
+
+		
+
+
