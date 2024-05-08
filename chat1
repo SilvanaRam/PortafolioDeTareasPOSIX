@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Dirección IP y puerto para la conexión
+ip="127.0.0.1"
+port="12345"
+
+# Define los colores usando códigos de escape ANSI
+pink_pastel='\e[95m'
+purple_pastel='\e[94m'
+default_color='\e[0m'
+
+# Bucle principal
+while true; do
+    # Leer mensaje del usuario
+    # lee la entrada del usuario y la guarda en la variable message.
+    echo -e -n "${pink_pastel}Escriba su mensaje: "
+    read message
+
+    # Enviar mensaje al receptor guardado en la variable message ucanso nc o sea netcat
+    echo "$message" | nc -q 0 $ip $port
+
+    # Esperar y recibe un mensage usando nc y guarda en received_message
+    received_message=$(nc -l -p $port)
+
+    #esto solo imprime el mensaje que esta en la variable
+    echo -e "${purple_pastel}Mensaje recibido: $received_message"
+done
+
