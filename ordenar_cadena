@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Verificar si se proporciona una cadena como argumento
+if [ -z "$1" ]; then
+    echo "Por favor, proporcione una cadena como argumento al ejecutar el script."
+    exit 1
+fi
+
+# Obtener la cadena proporcionada como argumento
+cadena="$1"
+
+# Ordenar alfabéticamente la cadena utilizando la ordenación de Bash
+cadena_ordenada=$(echo "$cadena" | grep -o . | LC_COLLATE=C sort | tr -d '\n')
+#grep -o : Divide la cadena en caracteres individuales
+#LC_COLLATE=C sort: Ordena alfabéticamente los caracteres utilizando el orden ASCII. LC_COLLATE=C establece la localización de la ordenación a "C", que es la localización estándar que usa el orden ASCII
+#tr -d '\n': elimina el salto de linea
+
+
+# Imprimir la cadena ordenada
+echo "La cadena ordenada alfabéticamente es: $cadena_ordenada"
+
