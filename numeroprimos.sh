@@ -23,7 +23,7 @@ is_prime() {
 }
 
 # Imprimir todos los números primos entre 60000 y 63000
-printf "Números primos entre 60000 y 63000:\n"
+printf "Números primos entre 60000 y 63000:/nt"
 for ((num = 60000; num <= 63000; num++)); do
     if is_prime $num; then
         printf "%d\t" $num
